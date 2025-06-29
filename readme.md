@@ -2,9 +2,10 @@
 
 1. git clone (https://github.com/kdaniel90/laravel-shop)
 2. cd to project (laravel-shop)
-3. docker compose up -d --build
-4. docker compose exec php bash
-5. composer setup
+3. create .env file, to set up db connection
+4. docker compose up -d --build
+5. docker compose exec php bash
+6. composer setup
 
 
 #to run the migrations
