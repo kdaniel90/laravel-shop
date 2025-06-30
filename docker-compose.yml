@@ -9,6 +9,15 @@ services:
             - 5173:5173
         volumes:
             - .:/var/www:cached
+        develop:
+            watch:
+                - action: sync
+                  path: './'
+                  target: '/'
+                  ignore:
+                      - .docker/
+                      - .github/
+                      - node_modules/
 
     ####################################################################################################
     # Nginx
@@ -38,9 +47,9 @@ services:
             - .docker/db/sql:/docker-entrypoint-initdb.d
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: mmctech_assignment
-            MYSQL_USER: mmctech_assignment
-            MYSQL_PASSWORD: mmctech_assignment
+            MYSQL_DATABASE: laravel_shop
+            MYSQL_USER: laravel_shop
+            MYSQL_PASSWORD: laravel_shop
 
     ####################################################################################################
     # phpMyAdmin

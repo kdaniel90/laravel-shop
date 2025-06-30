@@ -10,4 +10,6 @@ mkdir -p /sessions
 
 chmod 777 /sessions
 
+php artisan migrate
+
 exec "$@"
