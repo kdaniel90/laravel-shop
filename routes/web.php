@@ -12,10 +12,8 @@ Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->grou
         return Inertia::render('dashboard');
     })->name('dashboard');
 
-    Route::get('products', function () {
-        return Inertia::render('products/list');
-    })->name('products');
 });
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
+require __DIR__ . '/products.php';

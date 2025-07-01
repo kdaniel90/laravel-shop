@@ -35,14 +35,9 @@ const mainNavItems: NavGroup[] = [
             },
             {
                 title: 'Attributes',
-                href: 'products/attributes',
+                href: '/products/attributes',
                 icon: SettingsIcon
             },
-            {
-                title: 'Attribute values',
-                href: 'products/attributes-values',
-                icon: ChartCandlestickIcon
-            }
         ]
 
     }
