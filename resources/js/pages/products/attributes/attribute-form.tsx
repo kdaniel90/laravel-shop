@@ -28,7 +28,7 @@ interface AttributeFormProps {
     controller: 'create' | 'edit'
 }
 
-const CREATE_ENDPOINT = 'products.attributes.create';
+const CREATE_ENDPOINT = 'products.attributes.store';
 const EDIT_ENDPOINT = 'products.attributes.update';
 
 export default function AttributeForm({status, attribute, controller}: AttributeFormProps) {

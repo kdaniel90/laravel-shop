@@ -2,8 +2,16 @@ import AppLayout from "@/layouts/app-layout";
 import {Head, Link} from "@inertiajs/react";
 import {Button} from "@/components/ui/button";
 import {Plus} from "lucide-react";
+import Table from '@/components/ui/table';
 
-export default function List() {
+const TABLE_HEAD = ['Actions', 'Product Name', 'Product attributes'];
+
+interface Products extends IdAndName {
+    attributes: IdAndName[];
+}
+
+export default function List({products}: {products: Products[]}) {
+    console.log(products);
     return (
         <AppLayout>
             <Head title="Products list" />
@@ -11,12 +19,21 @@ export default function List() {
                 <div className="flex items-center gap-2">
                     <Link href={route('products.create')}>
                         <Button className="mr-2 cursor-pointer">
-                            <span>Add new product</span><Plus />
+                            <span>Add new product</span>
+                            <Plus />
                         </Button>
                     </Link>
-
                 </div>
             </div>
+            <Table
+                tableHead={TABLE_HEAD}
+                tableData={products.map((product) => ({
+                    name: product.name,
+                    id: product.id,
+                    values: product.attributes,
+                }))}
+                editLink="products.edit"
+            />
         </AppLayout>
     );
 }

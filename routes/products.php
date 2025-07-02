@@ -7,9 +7,7 @@ use App\Http\Controllers\Products\ProductsController;
 
 Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('products', function () {
-        return Inertia::render('products/list');
-    })->name('products');
+    Route::get('products', [ProductsController::class, 'index'])->name('products');
 
     Route::get('products/create', function () {
         return Inertia::render('products/create');
@@ -26,8 +24,14 @@ Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->grou
     Route::post('products/attributes/update', [ProductAttributesController::class, 'update'])->name('products.attributes.update');
 
     Route::post('products/attributes', [ProductAttributesController::class, 'store'])
-        ->name('products.attributes.create');
+        ->name('products.attributes.store');
 
     Route::get('products/create', [ProductsController::class, 'create'])->name('products.create');
+
+    Route::post('products', [ProductsController::class, 'store'])->name('products.store');
+
+    Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
+
+    Route::post('products/update', [ProductsController::class, 'update'])->name('products.update');
 
 });

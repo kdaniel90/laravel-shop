@@ -11,6 +11,6 @@ class Products extends Model {
     protected $fillable = ['name'];
     protected $hidden = ['pivot'];
     public function attributes(): BelongsToMany {
-        return $this->belongsToMany(AttributeValues::class, 'product_parameters_values', 'product_id', 'value_id');
+        return $this->belongsToMany(AttributeValues::class, 'product_parameter_values', 'product_id', 'value_id');
     }
 }
