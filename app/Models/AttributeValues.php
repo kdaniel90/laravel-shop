@@ -15,6 +15,7 @@ class AttributeValues extends Model {
     }
 
     public function products(): BelongsToMany {
-        return $this->belongsToMany(Products::class, 'product_parameter_values', 'product_id', 'value_id');
+        return $this->belongsToMany(Products::class, 'product_parameter_values', 'value_id', 'product_id');
     }
+
 }

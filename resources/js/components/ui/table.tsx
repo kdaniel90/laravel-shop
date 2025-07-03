@@ -1,43 +1,51 @@
-import { Card, Typography } from '@material-tailwind/react';
-import { Link } from '@inertiajs/react';
-import { Button } from '@/components/ui/button';
-import { Pencil } from 'lucide-react';
-import type { IdAndName } from '@/types';
+import {Link} from '@inertiajs/react';
+import {Button} from '@/components/ui/button';
+import {Pencil} from 'lucide-react';
+import type {IdAndName} from '@/types';
 
-export default function Table({ tableHead, tableData, editLink }) {
+interface TableData extends IdAndName {
+    values: IdAndName[]
+}
+
+interface TableProps {
+    tableHead: string[],
+    tableData: TableData[],
+    editLink: string
+}
+
+export default function Table({tableHead, tableData, editLink}: TableProps) {
 
     return (
-        <Card className="m-4 h-full">
-            <table className="min-w-max table-auto text-left">
+        <div className="rounded-xl overflow-hidden shadow-lg m-4 h-full bg-white ">
+            <table className="min-w-max table-auto text-left w-full">
                 <thead>
-                <tr>
-                    {tableHead.map((head) => (
-                        <th key={head} className="border-blue-gray-100 bg-blue-gray-50 border-b p-4">
-                            <Typography variant="small" color="blue-gray"
-                                        className="leading-none font-normal opacity-70">
-                                {head}
-                            </Typography>
-                        </th>
-                    ))}
-                </tr>
+                    <tr>
+                        {tableHead.map((head) => (
+                            <th key={head} className="border-blue-gray-100 bg-blue-gray-50 border-b p-4">
+                                <p className="leading-none font-normal opacity-70 text-gray-700">
+                                    {head}
+                                </p>
+                            </th>
+                        ))}
+                    </tr>
                 </thead>
                 <tbody>
-                {tableData.map(({ id, name, values }, index) => (
-                    <tr key={index} className="even:bg-blue-gray-50/50">
+                {tableData.map(({id, name, values}, index) => (
+                    <tr key={index} className="even:bg-gray-100">
                         <td className="p-4">
-                            <Link href={route(editLink, { id: id })}>
+                            <Link href={route(editLink, {id: id})}>
                                 <Button className="mr-2 cursor-pointer">
-                                    <Pencil /> <span>Edit</span>
+                                    <Pencil/> <span>Edit</span>
                                 </Button>
                             </Link>
                         </td>
                         <td className="p-4">
-                            <Typography variant="small" color="blue-gray" className="font-normal">
+                            <p className="leading-none font-normal opacity-70 text-black">
                                 {name}
-                            </Typography>
+                            </p>
                         </td>
                         <td className="p-4">
-                            <Typography variant="small" color="blue-gray" className="font-medium">
+                            <p>
                                 {values.map((tag: IdAndName, index: number) => (
                                     <span
                                         key={`${index}-${tag}`}
@@ -46,12 +54,12 @@ export default function Table({ tableHead, tableData, editLink }) {
                                             {tag.name}
                                         </span>
                                 ))}
-                            </Typography>
+                            </p>
                         </td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-        </Card>
+        </div>
     );
 };

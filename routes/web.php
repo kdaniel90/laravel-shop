@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\Products\ProductsController;
 
-Route::domain(env('APP_URL'))->get('/', function () {
-    return Inertia::render('welcome');
-})->name('home');
+Route::domain(env('APP_URL'))->get('', [ProductsController::class, 'getAllWithFilters'])->name('home');
+
 
 Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

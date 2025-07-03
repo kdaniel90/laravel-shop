@@ -51,7 +51,18 @@ class ProductsController extends Controller {
     {
         $product = Products::find($request->post('id'));
         $product->name = $request->post('name');
+        $product->save();
         $product->attributes()->sync(array_map(fn($value) => $value['id'], $request->post('attributes')));
         return back()->with('status', 'Product updated successfully!');
+    }
+
+    function getAllWithFilters(Request $request): Response {
+        $filters = ProductAttributes::with(['values' => fn($query) => $query->select('id', 'name')->withCount('products as productsCount')])->get(['id', 'name']);
+        $products = Products::with(['attributes' => fn($query) => $query->select('id', 'name')])->get(['id', 'name']);
+
+        return Inertia::render('homepage', [
+            'filters' => $filters,
+            'products' => $products,
+        ]);
     }
 }
