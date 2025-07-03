@@ -9,9 +9,9 @@ class AttributeValues extends Model {
 
     protected $table = 'product_parameters_values';
     protected $fillable = ['name'];
-    protected $hidden = ['pivot'];
+    protected $hidden = ['pivot', 'created_at', 'updated_at'];
     public function attributes(): BelongsToMany {
-        return $this->belongsToMany(ProductAttributes::class, 'parameters_values', 'parameter_id', 'value_id');
+        return $this->belongsToMany(ProductAttributes::class, 'parameters_values', 'value_id', 'parameter_id');
     }
 
     public function products(): BelongsToMany {

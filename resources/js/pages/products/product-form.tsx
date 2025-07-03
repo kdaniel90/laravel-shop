@@ -12,7 +12,7 @@ import { FormEventHandler } from 'react';
 type ProductForm = {
     id: number | undefined;
     name: string;
-    attributes: {
+    values: {
         id: null | number;
         name: string;
     }[];
@@ -23,7 +23,7 @@ interface Attribute extends IdAndName {
 }
 
 interface Product extends IdAndName {
-    attributes: IdAndName[];
+    values: IdAndName[];
 }
 
 interface ProductFormProps {
@@ -40,18 +40,18 @@ export default function ProductForm({ status, productAttributes, product, contro
     const { data, setData, post, processing, errors, reset } = useForm<Required<ProductForm>>({
         id: product?.id,
         name: product?.name || '',
-        attributes: product?.attributes || [],
+        values: product?.values || [],
     });
 
     const setAttributes = (value: IdAndName[]) => {
-        setData('attributes', value);
+        setData('values', value);
     };
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         const endpoint = controller === 'edit' ? EDIT_ENDPOINT : CREATE_ENDPOINT;
         post(route(endpoint), {
-            onFinish: controller === 'edit' ? undefined : () => reset('name', 'attributes'),
+            onFinish: controller === 'edit' ? undefined : () => reset('name', 'values'),
         });
     };
 
@@ -79,10 +79,10 @@ export default function ProductForm({ status, productAttributes, product, contro
                     {productAttributes.map((attribute) => (
                         <div key={attribute.id} className="relative grid gap-2">
                             <Label htmlFor="attribute-value">Select {attribute.name}</Label>
-                            <Listbox value={data.attributes} onChange={setAttributes} multiple>
+                            <Listbox value={data.values} onChange={setAttributes} multiple>
                                 <ListboxButton className="h-9 rounded-md border px-3 py-1 text-left md:text-sm">
                                     {attribute.values
-                                        .filter((el) => data.attributes.some((f) => f.id === el.id && f.name === el.name))
+                                        .filter((el) => data.values.some((f) => f.id === el.id && f.name === el.name))
                                         .map((attribute) => attribute.name)
                                         .join(', ')}
                                 </ListboxButton>

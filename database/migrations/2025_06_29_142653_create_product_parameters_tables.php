@@ -43,6 +43,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('product_parameters_tables');
+        Schema::dropIfExists('product_parameters');
+        Schema::dropIfExists('product_parameters_values');
+        Schema::dropIfExists('parameters_values');
+        Schema::dropIfExists('product_parameter_values');
     }
 };

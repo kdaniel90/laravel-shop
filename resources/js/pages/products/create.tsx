@@ -7,7 +7,6 @@ interface ProductAttribute extends IdAndName {
     values: IdAndName[];
 }
 
-
 interface CreateProductProps {
     status?: string;
     productAttributes: ProductAttribute[]

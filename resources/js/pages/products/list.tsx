@@ -3,11 +3,12 @@ import {Head, Link} from "@inertiajs/react";
 import {Button} from "@/components/ui/button";
 import {Plus} from "lucide-react";
 import Table from '@/components/ui/table';
+import { IdAndName } from '@/types';
 
 const TABLE_HEAD = ['Actions', 'Product Name', 'Product attributes'];
 
 interface Products extends IdAndName {
-    attributes: IdAndName[];
+    values: IdAndName[];
 }
 
 export default function List({products}: {products: Products[]}) {
@@ -27,11 +28,7 @@ export default function List({products}: {products: Products[]}) {
             </div>
             <Table
                 tableHead={TABLE_HEAD}
-                tableData={products.map((product) => ({
-                    name: product.name,
-                    id: product.id,
-                    values: product.attributes,
-                }))}
+                tableData={products}
                 editLink="products.edit"
             />
         </AppLayout>

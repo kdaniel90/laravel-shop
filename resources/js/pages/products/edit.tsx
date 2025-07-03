@@ -4,7 +4,11 @@ import type {BreadcrumbItem, IdAndName} from "@/types";
 import ProductForm from "@/pages/products/product-form";
 
 interface Product extends IdAndName {
-    attributes: IdAndName[];
+    values: IdAndName[];
+}
+
+interface ProductAttribute extends IdAndName {
+    values: IdAndName[];
 }
 
 interface CreateProductProps {

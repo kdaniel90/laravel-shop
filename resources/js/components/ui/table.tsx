@@ -46,7 +46,7 @@ export default function Table({tableHead, tableData, editLink}: TableProps) {
                         </td>
                         <td className="p-4">
                             <p>
-                                {values.map((tag: IdAndName, index: number) => (
+                                {(values || []).map((tag: IdAndName, index: number) => (
                                     <span
                                         key={`${index}-${tag}`}
                                         className="mr-2 inline-flex items-start justify-start rounded-[32px] bg-blue-100 px-3 py-2 text-sm font-medium text-blue-800 shadow-sm"
