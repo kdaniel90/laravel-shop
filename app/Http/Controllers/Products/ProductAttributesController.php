@@ -52,4 +52,10 @@ class ProductAttributesController extends Controller {
         return back()->with('status', 'Attribute updated successfully!');
     }
 
+    function delete(string $id): RedirectResponse {
+        $attribute = ProductAttributes::find($id);
+        $attribute->delete();
+        return back();
+    }
+
 }

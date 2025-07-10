@@ -12,7 +12,6 @@ interface Products extends IdAndName {
 }
 
 export default function List({products}: {products: Products[]}) {
-    console.log(products);
     return (
         <AppLayout>
             <Head title="Products list" />
@@ -30,6 +29,7 @@ export default function List({products}: {products: Products[]}) {
                 tableHead={TABLE_HEAD}
                 tableData={products}
                 editLink="products.edit"
+                deleteLink="products.delete"
             />
         </AppLayout>
     );

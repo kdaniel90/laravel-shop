@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Products;
 use App\Http\Controllers\Controller;
 use App\Models\ProductAttributes;
 use App\Models\Products;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -98,6 +99,18 @@ class ProductsController extends Controller
         return back()->with(['productFilters' => $newFilters, 'baseFilter' => $baseFilter]);
     }
 
+    function delete(string $id): RedirectResponse {
+        $product = Products::find($id);
+        $product->delete();
+        DB::table('product_parameters_values')
+            ->leftJoin('parameters_values', 'product_parameters_values.id', '=', 'parameters_values.value_id')
+            ->leftJoin('product_parameter_values', 'product_parameters_values.id', '=', 'product_parameter_values.value_id')
+            ->whereNull('parameters_values.parameter_id')
+            ->whereNull('product_parameter_values.value_id')
+            ->whereNull('product_parameter_values.product_id')
+            ->delete();
+        return back();
+    }
     private function calculateProductsCount($products, $filters, $baseFilter)
     {
         $updatedProductsCount = [];

@@ -21,6 +21,8 @@ Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->grou
 
     Route::get('products/attributes/{id}', [ProductAttributesController::class, 'edit'])->name('products.attributes.edit');
 
+    Route::delete('products/attributes/{id}', [ProductAttributesController::class, 'delete'])->name('products.attributes.delete');
+
     Route::post('products/attributes/update', [ProductAttributesController::class, 'update'])->name('products.attributes.update');
 
     Route::post('products/attributes', [ProductAttributesController::class, 'store'])
@@ -31,6 +33,8 @@ Route::domain('admin.' . env('APP_URL'))->middleware(['auth', 'verified'])->grou
     Route::post('products', [ProductsController::class, 'store'])->name('products.store');
 
     Route::get('products/{id}/edit', [ProductsController::class, 'edit'])->name('products.edit');
+
+    Route::delete('products/{id}', [ProductsController::class, 'delete'])->name('products.delete');
 
     Route::post('products/update', [ProductsController::class, 'update'])->name('products.update');
 

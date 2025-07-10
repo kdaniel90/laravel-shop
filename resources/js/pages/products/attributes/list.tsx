@@ -29,6 +29,7 @@ export default function List({ productAttributes }: { productAttributes: Product
                 tableHead={TABLE_HEAD}
                 tableData={productAttributes}
                 editLink="products.attributes.edit"
+                deleteLink="products.attributes.delete"
             />
         </AppLayout>
     );
